@@ -1,0 +1,8 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ../../../.
+      dockerfile: ./code/fargate/loader/Dockerfile
+    image: <account id>.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/loader:0.0.0-local.${VERSION}
+    env_file: ./config/${ENV}.${AWS_DEFAULT_REGION}.env

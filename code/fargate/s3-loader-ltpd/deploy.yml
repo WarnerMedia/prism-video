@@ -1,0 +1,8 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ../../../.
+      dockerfile: ./code/fargate/s3-loader-ltpd/Dockerfile
+    image: <aws account id>.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/s3-loader-ltpd:0.0.0-local.${VERSION}
+    env_file: ./config/${ENV}.${AWS_DEFAULT_REGION}.env

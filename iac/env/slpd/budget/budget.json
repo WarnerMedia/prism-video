@@ -1,0 +1,21 @@
+{
+  "BudgetLimit": {
+    "Amount": "500",
+    "Unit": "USD"
+  },
+  "BudgetName": "slpd-budget-monthly",
+  "BudgetType": "COST",
+  "CostFilters": {
+    "TagKeyValue": [
+      "user:application$doppler-video",
+      "user:environment$slpd"
+    ]
+  },
+  "CostTypes": {
+    "UseAmortized": true
+  },
+  "TimePeriod": {
+    "Start": 1596240000
+  },
+  "TimeUnit": "MONTHLY"
+}

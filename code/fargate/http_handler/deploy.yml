@@ -1,0 +1,10 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ../../../.
+      dockerfile: ./code/fargate/http_handler/Dockerfile
+    image: <aws account id>.dkr.ecr.${AWS_DEFAULT_REGION}.amazonaws.com/doppler-video:0.0.0-local.${VERSION}
+    ports:
+      - 80:8080
+    env_file: ./config/${ENV}.${AWS_DEFAULT_REGION}.env

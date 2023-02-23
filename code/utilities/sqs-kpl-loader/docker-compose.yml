@@ -1,0 +1,58 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ../../../.
+      dockerfile: ./code/utilities/sqs-kpl-loader/Dockerfile
+    image: <account id>.dkr.ecr.us-east-1.amazonaws.com/sqs-kpl-loader:0.0.0-local.${VERSION}
+    env_file: ./config/prod.us-east-1.env
+    environment:
+      HOST: kpl
+      ERROR_SOCKET_HOST: kpl
+      AWS_REGION: us-east-1
+      AWS_PROFILE: 
+    labels:
+      aws.ecs.fargate.deploy: 1
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [kpl, role]
+
+  kpl:
+    image: public.ecr.aws/v6s5y4v7/kplserver:v0.2.22
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      ERROR_SOCKET_PORT: 3001
+      AWS_DEFAULT_REGION: us-east-1
+      KINESIS_STREAM: doppler-video-prduseast1-kds-raw
+      AWS_PROFILE: 
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [role]
+
+  # aws role support
+  # aws role support
+  # You can build a local docker image of the code here: https://github.com/monetate/ectou-metadata and run it as your image below
+  # role:
+  #   image: <ectou-metadata image>
+  #   ports:
+  #     - 9000:80
+  #   environment:
+  #     # the role you want your container to assume
+  #     ROLE: 
+  #     # the local profile you want to use to assume the role
+  #     AWS_PROFILE: 
+  #   volumes:
+  #     - $HOME/.aws/credentials:/root/.aws/credentials:ro
+  #   networks:
+  #     default:
+  #       ipv4_address: 169.254.169.254
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.169.0/16
+          gateway: 169.254.169.1

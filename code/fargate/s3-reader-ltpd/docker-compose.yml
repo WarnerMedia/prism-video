@@ -1,0 +1,49 @@
+version: "2"
+services:
+  app:
+    build:
+      context: ../../../.
+      dockerfile: ./code/fargate/s3-reader-ltpd/Dockerfile
+    image: <account id>.dkr.ecr.us-east-1.amazonaws.com/s3-reader-ltpd:0.0.0-local.${VERSION}
+    env_file: ./config/dev.us-east-1.env
+    environment:
+      AWS_REGION: us-east-1
+      AWS_PROFILE: 
+    labels:
+      aws.ecs.fargate.deploy: 1
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [role]
+  agent: 
+    image: public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest
+    ports:
+      - 8125:8125
+    environment:
+      AWS_REGION: us-east-1
+      AWS_PROFILE:
+      CW_CONFIG_CONTENT: "{ \"metrics\": { \"metrics_collected\": { \"statsd\": { \"service_address\":\"8125\"}}}}"
+
+  # aws role support
+  # You can build a local docker image of the code here: https://github.com/monetate/ectou-metadata and run it as your image below
+  # role:
+  #   image: <ectou-metadata image>
+  #   ports:
+  #     - 9000:80
+  #   environment:
+  #     # the role you want your container to assume
+  #     ROLE: 
+  #     # the local profile you want to use to assume the role
+  #     AWS_PROFILE: 
+  #   volumes:
+  #     - $HOME/.aws/credentials:/root/.aws/credentials:ro
+  #   networks:
+  #     default:
+  #       ipv4_address: 169.254.169.254
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.169.0/16
+          gateway: 169.254.169.1

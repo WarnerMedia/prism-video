@@ -1,0 +1,88 @@
+version: "3.6"
+services:
+  app:
+    platform: linux/amd64
+    build:
+      context: ../../../.
+      dockerfile: ./code/fargate/loader/Dockerfile
+    image: <account id>.dkr.ecr.us-east-1.amazonaws.com/loader:0.0.0-local.${VERSION}
+    env_file: ./config/prod.us-east-1.env
+    environment:
+      HOST_DMT: kpl-dmt
+      ERROR_SOCKET_HOST_DMT: kpl-dmt
+      HOST_SLPD: kpl-slpd
+      ERROR_SOCKET_HOST_SLPD: kpl-slpd
+      AWS_REGION: us-east-1
+      AWS_PROFILE: 
+    labels:
+      aws.ecs.fargate.deploy: 1
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [kpl-dmt, kpl-slpd, role]
+
+  kpl-dmt:
+    platform: linux/amd64  
+    image: public.ecr.aws/v6s5y4v7/kplserver:v0.2.27
+    ports:
+      - 3000:3000
+    environment:
+      PORT: 3000
+      ERROR_SOCKET_PORT: 3001
+      AWS_DEFAULT_REGION: us-east-1
+      KINESIS_STREAM: doppler-video-dmtuseast1-kds-raw
+      AWS_PROFILE: 
+      METRICS_LEVEL: "none"      
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [role]
+
+  kpl-slpd:
+    platform: linux/amd64  
+    image: public.ecr.aws/v6s5y4v7/kplserver:v0.2.27
+    ports:
+      - 3010:3010
+    environment:
+      PORT: 3010
+      ERROR_SOCKET_PORT: 3011
+      AWS_DEFAULT_REGION: us-east-1
+      KINESIS_STREAM: doppler-video-slpduseast1-kds-raw
+      AWS_PROFILE: 
+      METRICS_LEVEL: "none"      
+    volumes:
+      - $HOME/.aws/credentials:/root/.aws/credentials:ro
+    depends_on: [role]
+
+  agent:
+    platform: linux/amd64  
+    image: public.ecr.aws/cloudwatch-agent/cloudwatch-agent:latest
+    ports:
+      - 8125:8125
+    environment:
+      AWS_REGION: us-east-1
+      AWS_PROFILE: 
+      CW_CONFIG_CONTENT: "{ \"metrics\": { \"metrics_collected\": { \"statsd\": { \"service_address\":\"8125\"}}}}"
+
+  # aws role support
+  # You can build a local docker image of the code here: https://github.com/monetate/ectou-metadata and run it as your image below
+  # role:
+  #   image: <ectou-metadata image>
+  #   ports:
+  #     - 9000:80
+  #   environment:
+  #     # the role you want your container to assume
+  #     ROLE: 
+  #     # the local profile you want to use to assume the role
+  #     AWS_PROFILE: 
+  #   volumes:
+  #     - $HOME/.aws/credentials:/root/.aws/credentials:ro
+  #   networks:
+  #     default:
+  #       ipv4_address: 169.254.169.254
+
+networks:
+  default:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.169.0/16
+          gateway: 169.254.169.1

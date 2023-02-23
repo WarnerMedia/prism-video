@@ -1,0 +1,47 @@
+# To get started with Dependabot version updates, you'll need to specify which
+# package ecosystems to update and where the package manifests are located.
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+updates:
+  - package-ecosystem: "gomod" # See documentation for possible values
+    directory: "/code"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "maven" # See documentation for possible values
+    directory: "/code/kda/agg" # Location of package manifests
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 30
+
+  - package-ecosystem: "gomod" # See documentation for possible values
+    directory: "/code/lambda/kds_timestream_buf_sess" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "gomod" # See documentation for possible values
+    directory: "/code/lambda/late_s3_metrics" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "terraform" # See documentation for possible values
+    directory: "/iac/base/dev" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform" # See documentation for possible values
+    directory: "/iac/env/dev" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform" # See documentation for possible values
+    directory: "/iac/env/dmt" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform" # See documentation for possible values
+    directory: "/iac/env/ltpd" # Location of package manifests
+    schedule:
+      interval: "weekly"
+  - package-ecosystem: "terraform" # See documentation for possible values
+    directory: "/iac/env/slpd" # Location of package manifests
+    schedule:
+      interval: "weekly"
