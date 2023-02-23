@@ -3,7 +3,7 @@ module doppler-video/code/lambda/kds_timestream_buf_sess
 go 1.18
 
 require (
-	github.com/Jeffail/gabs/v2 v2.6.1
+	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/aws/aws-lambda-go v1.37.0
 	github.com/aws/aws-sdk-go v1.44.199
 	github.com/awslabs/kinesis-aggregation/go v0.0.0-20220926094605-e6e1da9b7b9b
