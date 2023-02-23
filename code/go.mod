@@ -3,7 +3,7 @@ module doppler-video-telemetry/code
 go 1.19
 
 require (
-	github.com/Jeffail/gabs/v2 v2.6.1
+	github.com/Jeffail/gabs/v2 v2.7.0
 	github.com/aws/aws-lambda-go v1.37.0
 	github.com/aws/aws-sdk-go v1.44.199
 	github.com/cenkalti/backoff v2.2.1+incompatible
