@@ -49,3 +49,7 @@ and a registered domain name is required for exposing Doppler to the internet.
 # License
 
 This repository is released under [the MIT license](https://en.wikipedia.org/wiki/MIT_License).
+
+# CLA Assistant Test
+
+Small change to test the CLA Assistant.
