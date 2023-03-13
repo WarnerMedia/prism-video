@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/aws/aws-lambda-go v1.37.0
-	github.com/aws/aws-sdk-go v1.44.199
+	github.com/aws/aws-sdk-go v1.44.220
 	github.com/cenkalti/backoff v2.2.1+incompatible
 	github.com/etsy/statsd v0.9.0
 	github.com/go-kit/kit v0.12.0
