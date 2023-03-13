@@ -8,7 +8,7 @@ require (
 	github.com/aws/aws-sdk-go v1.44.199
 	github.com/awslabs/kinesis-aggregation/go v0.0.0-20220926094605-e6e1da9b7b9b
 	github.com/go-kit/kit v0.12.0
-	github.com/golang/protobuf v1.5.2
+	github.com/golang/protobuf v1.5.3
 	github.com/google/uuid v1.3.0
 	github.com/stretchr/testify v1.8.1
 )
