@@ -122,7 +122,7 @@
         <dependency>
             <groupId>software.amazon.awssdk</groupId>
             <artifactId>cloudwatch</artifactId>
-            <version>2.20.2</version>
+            <version>2.20.38</version>
         </dependency>
 
         <!-- provided scope -->
