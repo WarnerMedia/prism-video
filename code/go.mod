@@ -12,7 +12,7 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
 	github.com/pkg/errors v0.9.1
-	github.com/rs/cors v1.8.3
+	github.com/rs/cors v1.9.0
 	github.com/turnerlabs/kplclientgo v0.1.1
 	github.com/ua-parser/uap-go v0.0.0-20211112212520-00c877edfe0f
 	go.uber.org/zap v1.24.0
