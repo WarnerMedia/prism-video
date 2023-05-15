@@ -7,7 +7,7 @@ require (
 	github.com/aws/aws-lambda-go v1.37.0
 	github.com/aws/aws-sdk-go v1.44.199
 	github.com/cenkalti/backoff v2.2.1+incompatible
-	github.com/etsy/statsd v0.9.0
+	github.com/etsy/statsd v0.10.1
 	github.com/go-kit/kit v0.12.0
 	github.com/google/uuid v1.3.0
 	github.com/gorilla/mux v1.8.0
