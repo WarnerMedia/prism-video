@@ -5,7 +5,7 @@ go 1.18
 require (
 	github.com/Jeffail/gabs/v2 v2.6.1
 	github.com/aws/aws-lambda-go v1.37.0
-	github.com/aws/aws-sdk-go v1.44.199
+	github.com/aws/aws-sdk-go v1.44.307
 	github.com/awslabs/kinesis-aggregation/go v0.0.0-20220926094605-e6e1da9b7b9b
 	github.com/go-kit/kit v0.12.0
 	github.com/golang/protobuf v1.5.2
