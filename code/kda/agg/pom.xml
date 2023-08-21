@@ -36,7 +36,7 @@
                 <groupId>com.amazonaws</groupId>
                 <artifactId>aws-java-sdk-bom</artifactId>
                 <!-- Get the latest SDK version from https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-bom -->
-                <version>1.12.405</version>
+                <version>1.12.534</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
